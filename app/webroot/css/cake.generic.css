@@ -22,14 +22,9 @@
 
 /** General Style Info **/
 body {
-	background: #003d4c;
-	color: #fff;
-	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
-	font-size:90%;
-	margin: 0;
-}
-a {
-	color: #003d4c;
+	background: #66ffb2;
+	color: #f00;
+	font-family:'lucida grande',verdana,hel
 	text-decoration: underline;
 	font-weight: bold;
 }
@@ -37,7 +32,12 @@ a:hover {
 	color: #367889;
 	text-decoration:none;
 }
-a img {
+a img {vetica,arial,sans-serif;
+	font-size:90%;
+	margin: 0;
+}
+a {
+	color: #003d4c;
 	border:none;
 }
 h1, h2, h3, h4 {
@@ -73,7 +73,9 @@ p {
 
 /** Layout **/
 #container {
+
 	text-align: left;
+	
 }
 
 #header{
@@ -104,6 +106,7 @@ p {
 	overflow: auto;
 }
 #footer {
+	color:#f00;
 	clear: both;
 	padding: 6px 10px;
 }
@@ -183,7 +186,7 @@ table td.actions a {
 }
 .cake-sql-log td {
 	padding: 4px 8px;
-	text-align: left;
+	text-align: right;
 	font-family: Monaco, Consolas, "Courier New", monospaced;
 }
 .cake-sql-log caption {

@@ -1,62 +1,52 @@
-<h1>Blog posts</h1>
-<p><?php echo $this->Html->link("Add Post", array(
-'controller'=>'posts','action' => 'add')); ?></p>
-<?php
-    echo $this->Html->link("Logout", array(
-            'controller'=>'users', 'action'=>'logout'
-        ));
-?>
-<p>
-<?php
-    echo $this->Html->link('view user list', 
-            array('controller'=>'users', 'action'=>'index')
-        );
-?> 
-</p>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Image</th>
-        <th>Body</th>
-        <th>date</th>
-    </tr>
-
-    <!-- Here is where we loop through our $posts array, printing out post info -->
-
+<?php echo "Hello ".$name." welcome to 'view post page'";?>
+<div class="col-sm-12">
+  <div class="container-fluid bg text-center">
     <?php foreach ($posts as $post): ?>
-    <tr>
-        <td><?php echo $post['Post']['id']; ?></td>
-        <td>
-            <?php echo $this->Html->link($post['Post']['title'],
-             array('controller' => 'posts', 'action' => 'view', $post['Post']['id'])); ?>
-        </td>
-        <td><?php echo $this->Html->image('./posts/'.$post['Post']['imagePath'], array('alt' => 'Image', 'style'
-                    => 'width:100px; height:100px;'))?></td>
-        <td><?php echo $post['Post']['body']; ?></td>
-        <td><?php echo $post['Post']['created']; ?></td>
-    </td>
+      <div class="col-sm-4">
+        <div class="thumbnail">
+          <?php echo $this->Html->link($post['Post']['title'],
+          array('controller' => 'posts', 'action' => 'view', $post['Post']['id']),array('style'=>'color:black')); ?>
+          <?php echo $this->Html->link($this->Html->image('./posts/'.$post['Post']['imagePath'],
+            array('alt' => '<Image', 'style'=> 'width:100%;height:200px')),
+          array('controller'=>'posts', 'action'=>'view',$post['Post']['id']),
+          array('escape'=>false));
+          ?>
+          <?php echo $this->Html->link('View', array('controller'=>'posts', 'action'=>'view',
+            $post['Post']['id']), array('class'=>'btn btn-success'));
+            ?>
+            <?php
+            if($roles=='admin'){
 
-<td>
-<?php
-echo $this->Form->postLink(
-'Delete',
-array('action' => 'delete', $post['Post']['id']),
-array('confirm' => 'Are you sure?')
-);
-?>
-<?php
-echo $this->Html->link(
-'Edit', array('action' => 'edit', $post['Post']['id'])
-);
-?>
+              echo $this->Html->link('Edit', array('controller'=>'posts', 'action'=>'edit',
+                $post['Post']['id'],$arr), array('class'=>'btn btn-success'));
 
-</td>
-</tr>
-<?php endforeach; ?>
- <?php unset($post); ?>
-</table>
-   </body>
-</html>
-?>
+              echo $this->Form->postLink(
+               '<button class="btn btn-danger">
+               Delete
+             </button>',
+             array('controller'=>'posts',
+               'action'   => 'delete', $post['Post']['id'],$arr
+               ),
+             array(
+              'escape'   => false,
+              'confirm'  => 'Are you sure ?'
+              ));
+            }
+            ?>
+
+
+          </div>
+        </div>
+      <?php endforeach; ?>
+
+    </div>
+  </div>
+   <ul class = "pager">
+   <?php echo '<li class="previous">'.$this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled')).'<li>';?>
+   <?php echo '<li>'.$this->Paginator->numbers().'</li>';?>
+
+   <?php echo '<li class="next">'.$this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled')).'<li>';?>
+ </ul>
+
+
 

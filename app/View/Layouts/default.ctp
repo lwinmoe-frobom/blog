@@ -21,43 +21,97 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
 	<?php
-		echo $this->Html->meta('icon');
+	echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
+	echo $this->Html->css('bootstrap.min');
+	echo $this->Html->css('mystyle');
+	echo $this->fetch('meta');
+	echo $this->fetch('css');
+	echo $this->fetch('script');
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
+	<nav class="navbar  navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+		<div class="container-fluid ">
+			<div class="navbar-header">
 
-			<?php echo $this->Flash->render(); ?>
+				<a class="navbar-brand">Blog</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav" >
+					<?php if(AuthComponent::user('id')):?>
+						<li><?php
+							echo $this->Html->link('Add Post Here!',
+								array('controller'=>'posts', 'action'=>'add')
+								);
+								?> </li>
+								<li><?php
+									echo $this->Html->link('View Users List',
+										array('controller'=>'users', 'action'=>'index')
+										);
+										?> </li>
+										<li><?php
+											echo $this->Html->link('View Post',
+												array('controller'=>'posts', 'action'=>'index')
+												);
+												?></li>
+												<li><?php
+													echo $this->Html->link('Posts Manage',
+														array('controller'=>'posts', 'action'=>'post')
+														);
+														?></li>
 
-			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
-		</div>
-	</div>
-	<?php echo $this->element('sql_dump'); ?>
-</body>
-</html>
+														<li><?php
+															echo $this->Html->link('Logout',
+																array('controller'=>'users', 'action'=>'logout')
+																);
+																?></li>
+															<?php endif;?>
+															<?php if(!AuthComponent::user('id')):?>
+
+															</ul>
+															<ul class="nav navbar-nav">
+																<li><?php
+																	echo $this->Html->link('View Post',
+																		array('controller'=>'posts', 'action'=>'index')
+																		);
+																		?></li>
+																		<li><?php
+																			echo $this->Html->link('Register Here!',
+																				array('controller'=>'users', 'action'=>'add')
+																				);
+																				?></li>
+																				<li><?php
+																					echo $this->Html->link('login',
+																						array('controller'=>'users', 'action'=>'login')
+																						);
+																						?></li>
+																					</ul>
+																				<?php endif;?>
+																			</div>
+																		</div>
+																	</nav>
+
+																	<div class="jumbotron">
+																		<div class="container text-center">
+																			<h1>Frobom Myanmar</h1>
+																			<p>Some text that represents "Me"...</p>
+																		</div>
+																	</div>
+
+																	<div class="main_content">
+
+																		<?php echo $this->Flash->render(); ?>
+
+																		<?php echo $this->fetch('content'); ?>
+																	</div>
+
+																</div><br><br>
+
+																<footer class="container-fluid text-center">
+																	<p>Footer Text</p>
+																</footer>
+
+															</body>
+															</html>

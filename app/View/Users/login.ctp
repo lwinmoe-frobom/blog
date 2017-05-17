@@ -6,15 +6,22 @@
 ?>  
 
     <?php echo $this->Flash->render('auth');?>
-    <?php echo  $this->Form->create('User');?>
+    <?php echo  $this->Form->create('User', array('inputDefaults'=>array(
+            'div'=>'form-group',
+            'wrapInput'=>false,
+            'class'=>'form-control'
+    ),
+            'class'=>'well'
+    ));?>
     <fieldset>
         <legend>
             <?php echo __('Please enter your email and password');?>
         </legend>
         <?php 
-            echo $this->Form->input('email');
-            echo $this->Form->input('password');
+            echo $this->Form->input('email', array('style'=>'width:30%;'));
+            echo $this->Form->input('password', array('style'=>'width:30%;'));
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Login'));?>
+    <?php echo $this->Form->submit('Login', array('class'=>'btn btn-default'))?>
+    <?php echo $this->Form->end();?>
 </div>
